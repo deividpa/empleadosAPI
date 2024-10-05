@@ -17,7 +17,7 @@ describe('Autenticación', () => {
       .send({
         username: 'testuser',
         password: 'testpassword',
-        role: 'user'
+        role: 'empleado'
       });
 
     expect(res.statusCode).toBe(201);
