@@ -10,8 +10,14 @@ exports.getById = async (id) => {
 };
 
 exports.create = async (solicitudData) => {
-  return await prisma.solicitud.create({ data: solicitudData });
+  try {
+    return await prisma.solicitud.create({ data: solicitudData });
+  } catch (error) {
+    console.error('Error creando solicitud:', error);
+    throw error;
+  }
 };
+
 
 exports.update = async (id, solicitudData) => {
   return await prisma.solicitud.update({
