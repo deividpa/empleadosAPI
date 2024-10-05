@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: empleadosapiuser
+      POSTGRES_PASSWORD: empleadosAPIpassword
+      POSTGRES_DB: empleadosapidb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    command: npm start
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://empleadosapiuser:empleadosAPIpassword@db:5432/empleadosapidb
+      JWT_SECRET: tu_clave_secreta_para_jwt
+
+volumes:
+  pgdata:
