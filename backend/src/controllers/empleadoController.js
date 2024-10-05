@@ -20,8 +20,23 @@ exports.getEmpleadoById = async (req, res) => {
 };
 
 exports.createEmpleado = async (req, res) => {
+  const { fechaIngreso, nombre, salario } = req.body;
+  const fechaIngresoDate = new Date(fechaIngreso);
+
+  console.log(fechaIngresoDate.getTime())
+
+  if (isNaN(fechaIngresoDate.getTime())) {
+    return res.status(400).json({
+      message: 'Formato de fecha inválido. Debe ser YYYY-MM-DD.',
+    });
+  }
+
   try {
-    const newEmpleado = await empleadoService.create(req.body);
+    const newEmpleado = await empleadoService.create({
+      fechaIngreso: fechaIngresoDate,
+      nombre,
+      salario,
+    });
     res.status(201).json(newEmpleado);
   } catch (error) {
     res.status(500).json({ message: 'Error al crear empleado', error });
