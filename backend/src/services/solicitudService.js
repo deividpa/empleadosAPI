@@ -18,14 +18,37 @@ exports.create = async (solicitudData) => {
   }
 };
 
-
-exports.update = async (id, solicitudData) => {
-  return await prisma.solicitud.update({
-    where: { id: parseInt(id) },
-    data: solicitudData
-  });
-};
-
 exports.delete = async (id) => {
   return await prisma.solicitud.delete({ where: { id: parseInt(id) } });
+};
+
+exports.getEmpleados = async (page, size, codigo) => {
+  const skip = (page - 1) * size;
+  const take = parseInt(size);
+
+  const solicitudes = await prisma.solicitud.findMany({
+    skip,
+    take,
+    where: {
+      codigo: {
+        contains: codigo || '',
+        mode: 'insensitive',
+      },
+    },
+  });
+
+  const total = await prisma.solicitud.count({
+    where: {
+      codigo: {
+        contains: codigo || '',
+      },
+    },
+  });
+
+  return {
+    solicitudes,
+    total,
+    totalPages: Math.ceil(total / size),
+    currentPage: page,
+  };
 };

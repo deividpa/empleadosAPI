@@ -9,6 +9,17 @@ exports.getAllSolicitudes = async (req, res) => {
   }
 };
 
+exports.getSolicitudes = async (req, res) => {
+  const { page = 1, size = 10, codigo } = req.query;
+
+  try {
+    const result = await empleadoService.getEmpleados(parseInt(page), parseInt(size), codigo);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener solicitudes', error });
+  }
+};
+
 exports.getSolicitudById = async (req, res) => {
   try {
     const solicitud = await solicitudService.getById(req.params.id);
@@ -28,15 +39,6 @@ exports.createSolicitud = async (req, res) => {
   }
 };
 
-exports.updateSolicitud = async (req, res) => {
-  try {
-    const updatedSolicitud = await solicitudService.update(req.params.id, req.body);
-    if (!updatedSolicitud) return res.status(404).json({ message: 'Solicitud no encontrada' });
-    res.json(updatedSolicitud);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al actualizar la solicitud', error });
-  }
-};
 
 exports.deleteSolicitud = async (req, res) => {
   try {

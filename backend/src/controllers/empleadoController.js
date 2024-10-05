@@ -9,6 +9,17 @@ exports.getAllEmpleados = async (req, res) => {
   }
 };
 
+exports.getEmpleados = async (req, res) => {
+  const { page = 1, size = 10, nombre } = req.query;
+
+  try {
+    const result = await empleadoService.getEmpleados(parseInt(page), parseInt(size), nombre);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener empleados', error });
+  }
+};
+
 exports.getEmpleadoById = async (req, res) => {
   try {
     const empleado = await empleadoService.getById(req.params.id);
@@ -22,8 +33,6 @@ exports.getEmpleadoById = async (req, res) => {
 exports.createEmpleado = async (req, res) => {
   const { fechaIngreso, nombre, salario } = req.body;
   const fechaIngresoDate = new Date(fechaIngreso);
-
-  console.log(fechaIngresoDate.getTime())
 
   if (isNaN(fechaIngresoDate.getTime())) {
     return res.status(400).json({
@@ -43,15 +52,6 @@ exports.createEmpleado = async (req, res) => {
   }
 };
 
-exports.updateEmpleado = async (req, res) => {
-  try {
-    const updatedEmpleado = await empleadoService.update(req.params.id, req.body);
-    if (!updatedEmpleado) return res.status(404).json({ message: 'Empleado no encontrado' });
-    res.json(updatedEmpleado);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al actualizar el empleado', error });
-  }
-};
 
 exports.deleteEmpleado = async (req, res) => {
   try {
