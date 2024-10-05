@@ -3,9 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const prisma = require('../config/prismaClient');
+const { validateUser } = require('../middlewares/validation/userValidation');
 
 // Endpoint para registrar un usuario
-router.post('/register', async (req, res) => {
+router.post('/register', validateUser, async (req, res) => {
   const { username, password, role } = req.body;
 
   try {

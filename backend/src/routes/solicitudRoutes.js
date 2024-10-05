@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const solicitudController = require('../controllers/solicitudController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const { validateSolicitud } = require('../middlewares/validation/solicitudValidation');
 
 // Consultar solicitudes (accesible para todos los roles)
 // Consultar solicitudes
@@ -11,7 +12,7 @@ router.get('/:id', authMiddleware.verifyToken, solicitudController.getSolicitudB
 
 // Solo los administradores pueden insertar, actualizar y eliminar
 // Crear solicitud
-router.post('/', authMiddleware.verifyToken, authMiddleware.verifyAdmin, solicitudController.createSolicitud);
+router.post('/', authMiddleware.verifyToken, authMiddleware.verifyAdmin, validateSolicitud, solicitudController.createSolicitud);
 // Actualizar solicitud
 router.put('/:id', authMiddleware.verifyToken, authMiddleware.verifyAdmin, solicitudController.updateSolicitud);
 // Eliminar solicitud
