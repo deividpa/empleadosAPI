@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// endpoint: POST /register - Registro de usuarios
+// endpoint para registro de usuarios
 exports.register = async (req, res) => {
   const { username, password, role } = req.body;
 
@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
       data: {
         username,
         password: hashedPassword,
-        role: role || 'user' // Por defecto, el rol es "user"
+        role: role || 'empleado' // Por defecto, el rol es "empleado"
       }
     });
 
