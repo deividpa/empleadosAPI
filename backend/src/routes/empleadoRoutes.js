@@ -11,7 +11,7 @@ router.get('/buscar', authMiddleware.verifyToken, empleadoController.getEmpleado
 // Consultar empleados
 router.get('/', authMiddleware.verifyToken, empleadoController.getAllEmpleados); 
 // Consultar un empleado
-router.get('/:id', authMiddleware.verifyToken, empleadoController.getEmpleadoById); }
+router.get('/:id', authMiddleware.verifyToken, empleadoController.getEmpleadoById);
 // Crear empleado
 router.post('/', authMiddleware.verifyToken, validateEmpleado, empleadoController.createEmpleado);
 
