@@ -78,31 +78,12 @@ Este proyecto utiliza JSON Web Tokens (JWT) para la autenticación de usuarios.
 ## Medidas de Seguridad
 
 ### Prevención de SQL Injection
-- El uso de Prisma ORM proporciona protección automática contra SQL Injection mediante:
+- El uso de Prisma ORM le dio al proyecto una validacióm automática contra SQL Injection mediante:
   - Parámetros preparados
   - Escape automático de caracteres especiales
-  - Validación de tipos
 
 ### Buenas Prácticas Implementadas
 - Uso de variables de entorno para configuración sensible
 - Validación de entrada en todas las rutas
 - Manejo de errores centralizado
 - Autenticación basada en tokens JWT
-
-## TODOs y Mejoras Pendientes
-
-### Prioridad Alta
-- [ ] Implementar manejo de errores mejorado para operaciones CRUD
-- [ ] Agregar validación detallada de roles y permisos
-- [ ] Documentar roles disponibles y sus permisos específicos
-- [ ] Mejorar mensajes de error para operaciones no autorizadas
-
-### Prioridad Media
-- [ ] Implementar paginación en endpoints que retornan listas
-- [ ] Agregar filtrado de registros
-- [ ] Mejorar la documentación de endpoints
-
-### Prioridad Baja
-- [ ] Agregar tests automatizados
-- [ ] Implementar rate limiting
-- [ ] Agregar logging detallado
