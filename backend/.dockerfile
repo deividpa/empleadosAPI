@@ -1,5 +1,5 @@
 # Usar la imagen base de Node.js
-FROM node:18
+FROM node:20.18.0
 
 # Establecer el directorio de trabajo en el contenedor
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Exponer el puerto en el que se ejecutará la aplicación
-EXPOSE 3000
+EXPOSE 3001
 
 # Ejecutar migraciones de Prisma antes de iniciar la aplicación
 CMD ["npx", "prisma", "migrate", "dev", "--name", "init"]
