@@ -32,8 +32,7 @@ model Solicitud {
 
 enum Role {
   admin
-  user
-  manager
+  empleado
 }
 
 model User {
