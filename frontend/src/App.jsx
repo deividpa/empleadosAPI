@@ -9,11 +9,11 @@ import LoginPage from './components/pages/LoginPage';
 import RegisterPage from './components/pages/RegisterPage';
 import EmpleadoForm from './components/molecules/EmpleadoForm';
 import SolicitudForm from './components/molecules/SolicitudForm';
+import NotFoundPage from './components/pages/NotFoundPage';
 
-// Lazy Loading para las páginas
+// Lazy Loading para las páginas de Empleados y Solicitudes
 const EmpleadosPage = lazy(() => import('./components/pages/EmpleadosPage'));
-const SolicitudesPage = lazy(() => import('./components/pages/SolicitudesPage'))
-const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage'));
+const SolicitudesPage = lazy(() => import('./components/pages/SolicitudesPage'));
 
 function App() {
   return (
