@@ -13,17 +13,24 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   backend:
-    build: .
+    build: ./backend
     command: npm start
     volumes:
-      - .:/app
+      - ./backend:/app
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on:
       - db
     environment:
       DATABASE_URL: postgres://empleadosapiuser:empleadosAPIpassword@db:5432/empleadosapidb
-      JWT_SECRET: tu_clave_secreta_para_jwt
+      JWT_SECRET: empleadosAPIsecret
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
 
 volumes:
   pgdata:
