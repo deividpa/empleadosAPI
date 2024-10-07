@@ -31,6 +31,7 @@ exports.getEmpleadoById = async (req, res) => {
 };
 
 exports.createEmpleado = async (req, res) => {
+  console.log("Creando empleado desde el backend: ", req.body)
   const { fechaIngreso, nombre, salario } = req.body;
   const fechaIngresoDate = new Date(fechaIngreso);
 
@@ -40,14 +41,20 @@ exports.createEmpleado = async (req, res) => {
     });
   }
 
+  const parsedSalario = parseFloat(salario);
+
+  if (isNaN(parsedSalario)) {
+    return res.status(400).json({ message: 'El salario debe ser un número válido.' });
+  }
   try {
     const newEmpleado = await empleadoService.create({
       fechaIngreso: fechaIngresoDate,
       nombre,
-      salario,
+      salario: parsedSalario,
     });
     res.status(201).json(newEmpleado);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: 'Error al crear empleado', error });
   }
 };
