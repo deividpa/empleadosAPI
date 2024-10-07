@@ -10,6 +10,17 @@ const getAllEmpleados = async () => {
   return response.data;
 };
 
+// Buscar empleados por nombre
+const searchEmpleados = async (page, size, nombre) => {
+  const response = await axios.get(`${API_URL}/buscar`, {
+    params: { page, size, nombre },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  });
+
+  console.log(response.data)
+  return response.data;
+};
+
 // Crear un nuevo empleado
 const createEmpleado = async (empleadoData) => {
   const response = await axios.post(API_URL, empleadoData, {
@@ -28,6 +39,7 @@ const deleteEmpleado = async (empleadoId) => {
 
 const empleadoService = {
   getAllEmpleados,
+  searchEmpleados,
   createEmpleado,
   deleteEmpleado,
 };

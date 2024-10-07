@@ -21,23 +21,21 @@ exports.getEmpleados = async (page, size, nombre) => {
   const skip = (page - 1) * size;
   const take = parseInt(size);
 
+  const whereClause = nombre ? {
+    nombre: {
+      contains: nombre,
+      mode: 'insensitive',
+    },
+  } : {};
+
   const empleados = await prisma.empleado.findMany({
     skip,
     take,
-    where: {
-      nombre: {
-        contains: nombre || '',
-        mode: 'insensitive',
-      },
-    },
+    where: whereClause,
   });
 
   const total = await prisma.empleado.count({
-    where: {
-      nombre: {
-        contains: nombre || '',
-      },
-    },
+    where: whereClause,
   });
 
   return {
