@@ -27,6 +27,11 @@ const EmpleadoDetail = ({ empleado, isDeleted, setIsDeleted }) => {
     <div className={`bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-6 ${isDeleted ? 'bg-red-100' : ''}`}>
       <h2 className="text-2xl font-bold text-blue-600 text-center mb-4">{empleado.nombre}</h2>
       <div className="mb-2">
+        <div className="mb-2">
+          <p className="text-gray-900">
+            <strong>ID:</strong> {empleado.id}
+          </p>
+        </div>
         <p className="text-gray-700">
           <strong>Fecha de ingreso:</strong> {new Date(empleado.fechaIngreso).toLocaleDateString()}
         </p>
