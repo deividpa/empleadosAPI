@@ -4,8 +4,12 @@ const API_URL = '/api/empleados';
 
 // Obtener todos los empleados
 const getAllEmpleados = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return;
+  }
   const response = await axios.get(API_URL, {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
 };
