@@ -10,7 +10,7 @@ const cors = require('cors');
 
 // Middlewares
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: '*' }));
 
 // Rutas
 app.use('/api/empleados', empleadoRoutes);
