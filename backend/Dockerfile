@@ -5,7 +5,7 @@ FROM node:20.18.0
 WORKDIR /app
 
 # Copiar el archivo package.json y package-lock.json para instalar dependencias
-COPY package*.json ./ 
+COPY package*.json ./
 
 # Instalar dependencias
 RUN npm install
@@ -16,5 +16,5 @@ COPY . .
 # Exponer el puerto en el que se ejecutará la aplicación
 EXPOSE 3001
 
-# Ejecutar migraciones de Prisma y luego iniciar la aplicación
-CMD ["sh", "-c", "npx prisma migrate dev --name init && npm start"]
+# Comando para ejecutar la aplicación
+CMD ["npm", "start"]
