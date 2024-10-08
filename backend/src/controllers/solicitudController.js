@@ -35,6 +35,13 @@ exports.createSolicitud = async (req, res) => {
     const newSolicitud = await solicitudService.create(req.body);
     res.status(201).json(newSolicitud);
   } catch (error) {
+    if (error.code === 'P2003') {
+      return res.status(400).json({
+        message: 'Error al crear la solicitud',
+        error: 'El empleadoId proporcionado no es válido. Por favor, verifica que el empleado exista.',
+      });
+    }
+    
     res.status(500).json({ message: 'Error al crear solicitud', error });
   }
 };
