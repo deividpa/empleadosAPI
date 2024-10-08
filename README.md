@@ -15,9 +15,12 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
 
 La aplicación tiene la siguiente estructura de directorios:
 
-/backend - Código fuente del backend 
+/backend - Código fuente del backend
+
 /frontend - Código fuente del frontend 
-/db_init - Scripts de inicialización de la base de datos 
+
+/db_init - Scripts de inicialización de la base de datos
+
 /docker-compose.yml - Definición de los servicios Docker
 
 
@@ -38,7 +41,7 @@ Para iniciar la aplicación utilizando `docker-compose`, sigue los siguientes pa
 ### 1. Clona el repositorio
 
 ```bash
-git https://github.com/deividpa/empleadosAPI
+git clone https://github.com/deividpa/empleadosAPI
 ```
 
 ### 2. Construir y levantar los contenedores
