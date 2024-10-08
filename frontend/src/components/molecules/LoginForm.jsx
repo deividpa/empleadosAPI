@@ -7,14 +7,23 @@ import Label from '../atoms/Label';
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const { login } = useContext(AuthContext);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(credentials);
+    setError('');
+    
+    try {
+      await login(credentials);
+    } catch (error) {
+      console.log(error)
+      setError('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && <div className="text-red-500 mb-4">{error}</div>}
       <Label htmlFor="username">Username:</Label>
       <Input
         type="text"
