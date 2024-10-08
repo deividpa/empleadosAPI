@@ -17,7 +17,6 @@ const searchEmpleados = async (page, size, nombre) => {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
 
-  console.log(response.data)
   return response.data;
 };
 
@@ -30,7 +29,6 @@ const createEmpleado = async (empleadoData) => {
 };
 
 const deleteEmpleado = async (empleadoId) => {
-  console.log("Eliminando empleado")
   const response = await axios.delete(`${API_URL}/${empleadoId}`, {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
