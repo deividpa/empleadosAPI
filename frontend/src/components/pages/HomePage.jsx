@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import empleadoService from '../../services/empleadoService';
 
 const HomePage = () => {
+  const { user } = useContext(AuthContext);
   const [empleados, setEmpleados] = useState([]);
   const [page, setPage] = useState(1);
   const [nombre, setNombre] = useState('');
@@ -10,16 +12,31 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchEmpleados = async () => {
-      try {
-        const result = await empleadoService.searchEmpleados(page, size, nombre);
-        setEmpleados(result.empleados || []);
-      } catch (error) {
-        console.error('Error al obtener empleados:', error);
+      if (user && (user.role === 'admin' || user.role === 'empleado')) {
+        try {
+          const result = await empleadoService.searchEmpleados(page, size, nombre);
+          setEmpleados(result.empleados || []);
+        } catch (error) {
+          console.error('Error al obtener empleados:', error);
+        }
       }
     };
 
     fetchEmpleados();
-  }, [page, size, nombre]);
+  }, [user, page, size, nombre]);
+
+  if (!user || (user.role !== 'admin' && user.role !== 'empleado')) {
+    return (
+      <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">Bienvenido a la Aplicación</h1>
+      <p className="text-lg text-gray-700">
+        Aún no tienes permisos para acceder a la funcionalidad de búsqueda. Si deseas hacerlo, puedes{' '}
+        <a href="/register" className="text-blue-500 underline">registrarte</a> o{' '}
+        <a href="/login" className="text-blue-500 underline">iniciar sesión</a>.
+      </p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">
