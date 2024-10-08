@@ -11,13 +11,13 @@ const SolicitudForm = () => {
   const [codigo, setCodigo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [resumen, setResumen] = useState('');
-  const [empleado, setEmpleado] = useState('');
+  const [empleadoId, setEmpleadoId] = useState('');
   const [mensaje, setMensaje] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addSolicitud({ codigo, descripcion, resumen, empleado });
+      await addSolicitud({ codigo, descripcion, resumen, empleadoId });
       setMensaje('Solicitud creada con éxito');
     } catch (error) {
       setMensaje('Error al crear solicitud');
@@ -30,54 +30,68 @@ const SolicitudForm = () => {
   }
 
   return (
-    <div className="solicitud-form">
-      <h2>Crear Nueva Solicitud</h2>
+    <div className="solicitud-form max-w-lg mx-auto p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-2xl font-semibold mb-6">Crear Nueva Solicitud</h2>
       <form onSubmit={handleSubmit}>
+        
         <div className="mb-4">
-          <Label htmlFor="codigo">Código:</Label>
+          <Label htmlFor="codigo" className="block text-sm font-medium text-gray-700 mb-2">Código:</Label>
           <Input
             type="text"
             value={codigo}
             onChange={(e) => setCodigo(e.target.value)}
             name="codigo"
             required
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+        
         <div className="mb-4">
-          <Label htmlFor="descripcion">Descripción:</Label>
+          <Label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 mb-2">Descripción:</Label>
           <textarea
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
             name="descripcion"
             required
-            className="textarea border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
         </div>
+  
         <div className="mb-4">
-          <Label htmlFor="resumen">Resumen:</Label>
+          <Label htmlFor="resumen" className="block text-sm font-medium text-gray-700 mb-2">Resumen:</Label>
           <textarea
             value={resumen}
             onChange={(e) => setResumen(e.target.value)}
             name="resumen"
             required
-            className="textarea border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
         </div>
-        <div className="mb-4"> 
-          <Label htmlFor="empleado">Empleado:</Label>
-          <Input
+  
+        <div className="mb-4">
+          <Label htmlFor="empleadoId" className="block text-sm font-medium text-gray-700 mb-2">Empleado ID:</Label>
+          <input
             type="text"
-            value={empleado}
-            onChange={(e) => setEmpleado(e.target.value)}
-            name="empleado"
+            value={empleadoId}
+            onChange={(e) => setEmpleadoId(e.target.value)}
+            name="empleadoId"
             required
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <Button type="submit">Crear Solicitud</Button>
+  
+        <Button
+          type="submit"
+          className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Crear Solicitud
+        </Button>
       </form>
-      {mensaje && <p>{mensaje}</p>}
+  
+      {mensaje && <p className="mt-4 text-green-600">{mensaje}</p>}
     </div>
   );
+  
 };
 
 export default SolicitudForm;

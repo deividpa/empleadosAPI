@@ -19,8 +19,9 @@ export const SolicitudProvider = ({ children }) => {
     solicitudService.getAllSolicitudes().then((data) => setSolicitudes(data));
   }, []);
 
-  const addSolicitud = async (solicitudData) => {
-    const newEmpleado = await solicitudService.createSolicitud(solicitudData);
+  const addSolicitud = async ({codigo, descripcion, resumen, empleadoId}) => {
+    const parsedEmpleadoId = parseInt(empleadoId, 10); 
+    const newEmpleado = await solicitudService.createSolicitud({codigo, descripcion, resumen, empleadoId: parsedEmpleadoId}); 
     setSolicitudes((prevEmpleados) => [...prevEmpleados, newEmpleado]);
   };
 

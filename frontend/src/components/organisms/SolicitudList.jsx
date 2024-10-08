@@ -4,7 +4,7 @@ import SolicitudListItem from '../molecules/SolicitudListItem';
 import SolicitudForm from '../molecules/SolicitudForm';
 import { AuthContext } from '../../context/AuthContext';
 
-const SolicitudList = ({ solicitudes, onSelect }) => {
+const SolicitudList = ({ solicitudes }) => {
   const { user } = useContext(AuthContext);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
@@ -23,7 +23,7 @@ const SolicitudList = ({ solicitudes, onSelect }) => {
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {solicitudes.map((solicitud) => (
-          <SolicitudListItem key={solicitud.id} solicitud={solicitud} onSelect={onSelect} />
+          <SolicitudListItem key={solicitud.id} solicitud={solicitud} />
         ))}
       </div>
     </div>
@@ -38,7 +38,6 @@ SolicitudList.propTypes = {
         resumen: propTypes.string.isRequired,
         empleadoId: propTypes.number.isRequired,
     })).isRequired,
-    onSelect: propTypes.func.isRequired,
 };
 
 export default SolicitudList;
