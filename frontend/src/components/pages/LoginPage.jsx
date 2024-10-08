@@ -5,14 +5,18 @@ import { AuthContext } from '../../context/AuthContext';
 import LoginForm from '../molecules/LoginForm';
 
 const LoginPage = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (!loading && user) {
       navigate('/');
     }
-  }, [user, navigate]);
+  }, [user, loading, navigate]);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
 
   return (
     <div className="mx-5">
