@@ -35,11 +35,14 @@ const Navbar = () => {
             </li>
           </>
         ) : (
-          <li>
-            <button onClick={handleLogout} className="text-white hover:text-gray-200">
-              Logout
-            </button>
-          </li>
+          <>
+            <li className="text-white">Rol: {user.role || 'guest'}</li>
+            <li>
+              <button onClick={handleLogout} className="text-white hover:text-gray-200">
+                Logout
+              </button>
+            </li>
+          </>
         )}
       </ul>
     </nav>
