@@ -20,7 +20,11 @@ const SolicitudForm = () => {
       await addSolicitud({ codigo, descripcion, resumen, empleadoId });
       setMensaje('Solicitud creada con éxito');
     } catch (error) {
-      setMensaje('Error al crear solicitud');
+      if (error.response && error.response.data.error) {
+        setMensaje(error.response.data.error);
+      } else {
+        setMensaje('Error al crear solicitud');
+      }
       console.error('Error:', error);
     }
   };
