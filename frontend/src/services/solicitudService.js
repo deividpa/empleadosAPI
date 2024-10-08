@@ -4,8 +4,13 @@ const API_URL = '/api/solicitudes';
 
 // Obtener todas las solicitudes
 const getAllSolicitudes = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return;
+  }
+
   const response = await axios.get(API_URL, {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;
 };
