@@ -1,19 +1,27 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import solicitudService from '../services/solicitudService';
+import { AuthContext } from './AuthContext';
 
 export const SolicitudContext = createContext();
 
 export const SolicitudProvider = ({ children }) => {
   const [solicitudes, setSolicitudes] = useState([]);
+  const { user, loading } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchEmpleados = async () => {
-      const solicitudesData = await solicitudService.getAllSolicitudes();
-      setSolicitudes(solicitudesData);
+    const fetchSolicitudes = async () => {
+      if (!loading && user) {
+        try {
+          const solicitudesData = await solicitudService.getAllSolicitudes();
+          setSolicitudes(solicitudesData);
+        } catch (error) {
+          console.error('Error al obtener solicitudes:', error);
+        }
+      }
     };
-    fetchEmpleados();
-  }, []);
+    fetchSolicitudes();
+  }, [loading, user]);
 
   useEffect(() => {
     solicitudService.getAllSolicitudes().then((data) => setSolicitudes(data));
@@ -21,8 +29,13 @@ export const SolicitudProvider = ({ children }) => {
 
   const addSolicitud = async ({codigo, descripcion, resumen, empleadoId}) => {
     const parsedEmpleadoId = parseInt(empleadoId, 10); 
-    const newEmpleado = await solicitudService.createSolicitud({codigo, descripcion, resumen, empleadoId: parsedEmpleadoId}); 
-    setSolicitudes((prevEmpleados) => [...prevEmpleados, newEmpleado]);
+    const newSolicitud = await solicitudService.createSolicitud({
+      codigo, 
+      descripcion, 
+      resumen, 
+      empleadoId: parsedEmpleadoId
+    }); 
+    setSolicitudes((prevEmpleados) => [...prevEmpleados, newSolicitud]);
   };
 
   return (
