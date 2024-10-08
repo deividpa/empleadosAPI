@@ -7,9 +7,22 @@ import { AuthContext } from '../../context/AuthContext';
 const SolicitudList = ({ solicitudes }) => {
   const { user } = useContext(AuthContext);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [showAlert, setShowAlert] = useState(user?.role !== 'admin');
 
   return (
-    <div>
+    <div className="container mx-auto p-4">
+      {showAlert && (
+        <div className="bg-orange-200 text-orange-800 p-4 rounded-lg mb-4 relative">
+          <span className="block">Solo los administradores pueden crear nuevas solicitudes.</span>
+          <button 
+            className="absolute top-0 right-0 mt-2 mr-4 font-bold text-orange-800" 
+            onClick={() => setShowAlert(false)}
+          >
+            x
+          </button>
+        </div>
+      )}
+
       {user && user.role === 'admin' && (
         <div className="mt-4">
           <button
@@ -22,9 +35,13 @@ const SolicitudList = ({ solicitudes }) => {
         </div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-        {solicitudes.map((solicitud) => (
-          <SolicitudListItem key={solicitud.id} solicitud={solicitud} />
-        ))}
+        {Array.isArray(solicitudes) && solicitudes.length > 0 ? (
+          solicitudes.map((solicitud) => (
+            <SolicitudListItem key={solicitud.id} solicitud={solicitud} />
+          ))
+        ) : (
+          <p className="text-center text-gray-600">No hay solicitudes disponibles.</p>
+        )}
       </div>
     </div>
   );
@@ -37,7 +54,7 @@ SolicitudList.propTypes = {
         descripcion: propTypes.string.isRequired,
         resumen: propTypes.string.isRequired,
         empleadoId: propTypes.number.isRequired,
-    })).isRequired,
+    })),
 };
 
 export default SolicitudList;
