@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/'); // Redirige al home si el usuario ya está logueado
+      navigate('/');
     }
   }, [user, navigate]);
 

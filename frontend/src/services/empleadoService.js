@@ -28,6 +28,7 @@ const createEmpleado = async (empleadoData) => {
   return response.data;
 };
 
+// Eliminar un empleado
 const deleteEmpleado = async (empleadoId) => {
   const response = await axios.delete(`${API_URL}/${empleadoId}`, {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
