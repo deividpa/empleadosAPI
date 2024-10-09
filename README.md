@@ -95,9 +95,8 @@ Los datos de la base de datos se almacenan en un volumen persistente llamado pgd
 Asegúrate de que los puertos 3001 (backend), 5173 (frontend) y 5432 (Postgres) estén libres antes de ejecutar la aplicación.
 
 
-# Buenas Prácticas del proyecto tanto en el Backend como en el Frontend
 
-# Mejores Prácticas y Seguridad en el Proyecto Full Stack
+# Buenas Prácticas del proyecto tanto en el Backend como en el Frontend
 
 En este proyecto, tomé varias decisiones clave para asegurar la calidad del código y la seguridad de la aplicación, tanto en el backend como en el frontend.
 
