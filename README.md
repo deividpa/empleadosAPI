@@ -93,3 +93,43 @@ Los datos de la base de datos se almacenan en un volumen persistente llamado pgd
 
 ## Nota importante
 Asegúrate de que los puertos 3001 (backend), 5173 (frontend) y 5432 (Postgres) estén libres antes de ejecutar la aplicación.
+
+
+# Buenas Prácticas del proyecto tanto en el Backend como en el Frontend
+
+# Mejores Prácticas y Seguridad en el Proyecto Full Stack
+
+En este proyecto, tomé varias decisiones clave para asegurar la calidad del código y la seguridad de la aplicación, tanto en el backend como en el frontend.
+
+## Backend
+
+1. **Uso de Prisma como ORM**: 
+   Utilicé Prisma para interactuar con la base de datos, lo que me permitió tener un mapeo claro de los modelos y realizar consultas de manera sencilla, eficiente y sobre todo segura.
+
+2. **Validaciones con JOI**:
+   Implementé JOI para asegurar que los datos entrantes cumplan con los requisitos necesarios antes de ser procesados. Esto ayuda a prevenir errores y asegura la integridad de los datos antes de ser ingresados a la base de datos.
+
+3. **Arquitectura MVC**:
+   Opté por una arquitectura MVC, separando claramente los controladores, servicios y modelos. Esta separación me facilitó la organización y la escalabilidad del código.
+
+4. **Pruebas Unitarias e Integración**:
+   Realicé pruebas unitarias e integradas para asegurar que cada parte del código funcionara como se esperaba. Esto me permitió detectar errores más rápido y me permitió en la medida en la que avanzaba, a que los cambios no rompieran funcionalidades existentes.
+
+5. **Manejo de Middlewares con JWT**:
+   Implementé middlewares utilizando JWT, por ejemplo, para el manejo de sesiones y el control de permisos. Esto facilita que solo los usuarios autorizados puedan acceder a ciertas rutas de la aplicación.
+
+## Frontend
+
+1. **Metodología de Atomic Design**:
+   Seguí la metodología de atomic design para estructurar los componentes de la aplicación. Y procuré que cada componente tuviera una responsabilidad única, lo que mejora la claridad y la reutilización del código.
+
+2. **Manejo Seguro del Token**:
+   Siempre manejé el token de manera cifrada, asegurando que las credenciales del usuario estén protegidas durante la comunicación entre el cliente y el servidor.
+
+3. **Renderizado Condicional de Componentes**:
+   Creé ciertos componentes que solo eran renderizados si el usuario tenía las autorizaciones necesarias. Esto buscando prevenir el acceso no autorizado a funcionalidades exclusivas para ciertos roles.
+
+4. **Uso de Tailwind para Estilos**:
+   Utilicé Tailwind CSS para manejar estilos de manera estandarizada. Esto no solo mejora la consistencia visual, sino que también agiliza el desarrollo al permitir un diseño responsivo de forma sencilla.
+
+Todas estas prácticas y decisiones terminaron siendo importantes para construir una aplicación robusta y segura, garantizando una buena experiencia de usuario y un código mantenible.
