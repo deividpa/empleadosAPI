@@ -33,8 +33,9 @@ const RegisterPage = () => {
       <h1 className="text-2xl font-bold mb-4">Registro</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Usuario</label>
+          <label htmlFor="username">Usuario</label>
           <input
+            id="username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -42,8 +43,9 @@ const RegisterPage = () => {
           />
         </div>
         <div>
-          <label>Contraseña</label>
+          <label htmlFor="password">Contraseña</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -51,8 +53,13 @@ const RegisterPage = () => {
           />
         </div>
         <div>
-          <label>Rol</label>
-          <select value={role} onChange={(e) => setRole(e.target.value)} className="border rounded p-2">
+          <label htmlFor="role">Rol</label>
+          <select 
+            id="role"
+            value={role} 
+            onChange={(e) => setRole(e.target.value)} 
+            className="border rounded p-2"
+          >
             <option value="empleado">Empleado</option>
             <option value="admin">Admin</option>
           </select>
